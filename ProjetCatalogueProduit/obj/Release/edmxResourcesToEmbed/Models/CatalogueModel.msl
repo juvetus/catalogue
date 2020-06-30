@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BD_Catalogue_ProduitModelStoreContainer" CdmEntityContainer="Catalogue_Entities">
+    <EntitySetMapping Name="Cat_Categorie">
+      <EntityTypeMapping TypeName="BD_Catalogue_ProduitModel.Cat_Categorie">
+        <MappingFragment StoreEntitySet="Cat_Categorie">
+          <ScalarProperty Name="Code_Categorie" ColumnName="Code_Categorie" />
+          <ScalarProperty Name="Libelle_Categorie" ColumnName="Libelle_Categorie" />
+          <ScalarProperty Name="Date_Saisie" ColumnName="Date_Saisie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cat_Produit">
+      <EntityTypeMapping TypeName="BD_Catalogue_ProduitModel.Cat_Produit">
+        <MappingFragment StoreEntitySet="Cat_Produit">
+          <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />
+          <ScalarProperty Name="Code_Categorie" ColumnName="Code_Categorie" />
+          <ScalarProperty Name="Libelle_Produit" ColumnName="Libelle_Produit" />
+          <ScalarProperty Name="Description_Produit" ColumnName="Description_Produit" />
+          <ScalarProperty Name="Image_Produit" ColumnName="Image_Produit" />
+          <ScalarProperty Name="Url_Image_Produit" ColumnName="Url_Image_Produit" />
+          <ScalarProperty Name="Date_Saisie" ColumnName="Date_Saisie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

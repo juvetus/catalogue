@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BD_Catalogue_ProduitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cat_Categorie">
+          <Key>
+            <PropertyRef Name="Code_Categorie" />
+          </Key>
+          <Property Name="Code_Categorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle_Categorie" Type="nvarchar(max)" />
+          <Property Name="Date_Saisie" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Cat_Produit">
+          <Key>
+            <PropertyRef Name="Code_Produit" />
+          </Key>
+          <Property Name="Code_Produit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code_Categorie" Type="int" />
+          <Property Name="Libelle_Produit" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description_Produit" Type="nvarchar(max)" />
+          <Property Name="Image_Produit" Type="nvarchar(max)" />
+          <Property Name="Url_Image_Produit" Type="nvarchar(max)" />
+          <Property Name="Date_Saisie" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Cat_Produit_Cat_Produit">
+          <End Role="Cat_Categorie" Type="Self.Cat_Categorie" Multiplicity="0..1" />
+          <End Role="Cat_Produit" Type="Self.Cat_Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Categorie">
+              <PropertyRef Name="Code_Categorie" />
+            </Principal>
+            <Dependent Role="Cat_Produit">
+              <PropertyRef Name="Code_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cat_Produit_Cat_Produit1">
+          <End Role="Cat_Produit" Type="Self.Cat_Produit" Multiplicity="1" />
+          <End Role="Cat_Produit1" Type="Self.Cat_Produit" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Produit">
+              <PropertyRef Name="Code_Produit" />
+            </Principal>
+            <Dependent Role="Cat_Produit1">
+              <PropertyRef Name="Code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_Catalogue_ProduitModelStoreContainer">
+          <EntitySet Name="Cat_Categorie" EntityType="Self.Cat_Categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Produit" EntityType="Self.Cat_Produit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cat_Produit_Cat_Produit" Association="Self.FK_Cat_Produit_Cat_Produit">
+            <End Role="Cat_Categorie" EntitySet="Cat_Categorie" />
+            <End Role="Cat_Produit" EntitySet="Cat_Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cat_Produit_Cat_Produit1" Association="Self.FK_Cat_Produit_Cat_Produit1">
+            <End Role="Cat_Produit" EntitySet="Cat_Produit" />
+            <End Role="Cat_Produit1" EntitySet="Cat_Produit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_Catalogue_ProduitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cat_Categorie">
+          <Key>
+            <PropertyRef Name="Code_Categorie" />
+          </Key>
+          <Property Name="Code_Categorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle_Categorie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Saisie" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cat_Produit" Relationship="Self.FK_Cat_Produit_Cat_Produit" FromRole="Cat_Categorie" ToRole="Cat_Produit" />
+        </EntityType>
+        <EntityType Name="Cat_Produit">
+          <Key>
+            <PropertyRef Name="Code_Produit" />
+          </Key>
+          <Property Name="Code_Produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code_Categorie" Type="Int32" />
+          <Property Name="Libelle_Produit" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Produit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image_Produit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url_Image_Produit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Saisie" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cat_Categorie" Relationship="Self.FK_Cat_Produit_Cat_Produit" FromRole="Cat_Produit" ToRole="Cat_Categorie" />
+          <NavigationProperty Name="Cat_Produit1" Relationship="Self.FK_Cat_Produit_Cat_Produit1" FromRole="Cat_Produit" ToRole="Cat_Produit1" />
+          <NavigationProperty Name="Cat_Produit2" Relationship="Self.FK_Cat_Produit_Cat_Produit1" FromRole="Cat_Produit1" ToRole="Cat_Produit" />
+        </EntityType>
+        <Association Name="FK_Cat_Produit_Cat_Produit">
+          <End Role="Cat_Categorie" Type="Self.Cat_Categorie" Multiplicity="0..1" />
+          <End Role="Cat_Produit" Type="Self.Cat_Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Categorie">
+              <PropertyRef Name="Code_Categorie" />
+            </Principal>
+            <Dependent Role="Cat_Produit">
+              <PropertyRef Name="Code_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cat_Produit_Cat_Produit1">
+          <End Role="Cat_Produit" Type="Self.Cat_Produit" Multiplicity="1" />
+          <End Role="Cat_Produit1" Type="Self.Cat_Produit" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Produit">
+              <PropertyRef Name="Code_Produit" />
+            </Principal>
+            <Dependent Role="Cat_Produit1">
+              <PropertyRef Name="Code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Catalogue_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cat_Categorie" EntityType="Self.Cat_Categorie" />
+          <EntitySet Name="Cat_Produit" EntityType="Self.Cat_Produit" />
+          <AssociationSet Name="FK_Cat_Produit_Cat_Produit" Association="Self.FK_Cat_Produit_Cat_Produit">
+            <End Role="Cat_Categorie" EntitySet="Cat_Categorie" />
+            <End Role="Cat_Produit" EntitySet="Cat_Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cat_Produit_Cat_Produit1" Association="Self.FK_Cat_Produit_Cat_Produit1">
+            <End Role="Cat_Produit" EntitySet="Cat_Produit" />
+            <End Role="Cat_Produit1" EntitySet="Cat_Produit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_Catalogue_ProduitModelStoreContainer" CdmEntityContainer="Catalogue_Entities">
+          <EntitySetMapping Name="Cat_Categorie">
+            <EntityTypeMapping TypeName="BD_Catalogue_ProduitModel.Cat_Categorie">
+              <MappingFragment StoreEntitySet="Cat_Categorie">
+                <ScalarProperty Name="Code_Categorie" ColumnName="Code_Categorie" />
+                <ScalarProperty Name="Libelle_Categorie" ColumnName="Libelle_Categorie" />
+                <ScalarProperty Name="Date_Saisie" ColumnName="Date_Saisie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Produit">
+            <EntityTypeMapping TypeName="BD_Catalogue_ProduitModel.Cat_Produit">
+              <MappingFragment StoreEntitySet="Cat_Produit">
+                <ScalarProperty Name="Code_Produit" ColumnName="Code_Produit" />
+                <ScalarProperty Name="Code_Categorie" ColumnName="Code_Categorie" />
+                <ScalarProperty Name="Libelle_Produit" ColumnName="Libelle_Produit" />
+                <ScalarProperty Name="Description_Produit" ColumnName="Description_Produit" />
+                <ScalarProperty Name="Image_Produit" ColumnName="Image_Produit" />
+                <ScalarProperty Name="Url_Image_Produit" ColumnName="Url_Image_Produit" />
+                <ScalarProperty Name="Date_Saisie" ColumnName="Date_Saisie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

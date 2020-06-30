@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Notre Catalogue des Produits </h2>
+
+@foreach (var data in ViewBag.listeCategorie)
+{
+    
+
+
+    <div class="row col-xs-12 col-lg-12" >
+       <div style="background-color:blue; font-size:26px; color:white">
+           @data.Libelle_Categorie
+       </div>
+        @foreach (var produit in data.Cat_Produit)
+        {
+          <div class="col-xs-12 col-sm-3 col-lg-12" > <br />
+              <div>@produit.Libelle_Produit</div> 
+              <div><img src="@produit.Url_Image_Produit/@produit.Image_Produit" width="100" height="80" /></div>
+              <div>@produit.Description_Produit</div>
+              <div><a href="" class="btn btn-warning">Voir Detail</a></div> <br />
+          </div>
+        }
+    </div>
+    
+
+
+}
+
+
+
+
+

@@ -1,0 +1,59 @@
+﻿@model ProjetCatalogueProduit.Models.Cat_Categorie
+@{
+    ViewBag.Title = "AjoutCategorie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter Un Categorie</h2>
+
+
+<div>
+
+    <form id="formCategorie" name="formCategorie" action="" method="post">
+        @if (Model != null)
+        {
+            <input type="hidden"  name="Code_Categorie" id="Code_Categorie" value="@Model.Code_Categorie"/>
+        }
+        <div class="form-group">
+            <label>Categorie *</label>
+            <input type="text" id="Libelle_Categorie" name="Libelle_Categorie" class="form-control" value="@(Model != null? Model.Libelle_Categorie:"")" required/>
+        </div>
+        <div>
+            @if (Model == null)
+            {
+                <input type="submit" id="enregister" name="enregistrer" value="Enregistrer" class="btn btn-primary" />
+            }
+            else
+            {
+                <input type="submit" id="modifier" name="modifier" value="Enregistrer Modification" class="btn btn-success" />
+                <a href="~/Categorie/AjoutCategorie" class="btn btn-default">Annuler</a>
+            }
+
+        </div>
+    </form>
+
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>Categorie</th>
+                <th>Date Saisie</th>
+            </tr>
+           @foreach (var data in ViewBag.listeCategorie)
+           {
+               <tr>
+                   <td>@data.Libelle_Categorie</td>
+                   <td>@data.Date_Saisie</td>
+                   <td><a href="~/Categorie/ModifierCategorie/@data.Code_Categorie" class="btn bg-warning btn-xs"><span class="glyphicon glyphicon-edit" ></span> Modifier</a> </td>
+                   <td><a href="~/Categorie/SupprimerCategorie/@data.Code_Categorie" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a></td>
+
+               </tr>
+           }
+        </table>
+
+    </div>
+
+
+</div>
+

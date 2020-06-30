@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_Catalogue_ProduitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cat_Categorie">
+    <Key>
+      <PropertyRef Name="Code_Categorie" />
+    </Key>
+    <Property Name="Code_Categorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Libelle_Categorie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date_Saisie" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Cat_Produit" Relationship="Self.FK_Cat_Produit_Cat_Produit" FromRole="Cat_Categorie" ToRole="Cat_Produit" />
+  </EntityType>
+  <EntityType Name="Cat_Produit">
+    <Key>
+      <PropertyRef Name="Code_Produit" />
+    </Key>
+    <Property Name="Code_Produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code_Categorie" Type="Int32" />
+    <Property Name="Libelle_Produit" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description_Produit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image_Produit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Url_Image_Produit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date_Saisie" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Cat_Categorie" Relationship="Self.FK_Cat_Produit_Cat_Produit" FromRole="Cat_Produit" ToRole="Cat_Categorie" />
+    <NavigationProperty Name="Cat_Produit1" Relationship="Self.FK_Cat_Produit_Cat_Produit1" FromRole="Cat_Produit" ToRole="Cat_Produit1" />
+    <NavigationProperty Name="Cat_Produit2" Relationship="Self.FK_Cat_Produit_Cat_Produit1" FromRole="Cat_Produit1" ToRole="Cat_Produit" />
+  </EntityType>
+  <Association Name="FK_Cat_Produit_Cat_Produit">
+    <End Role="Cat_Categorie" Type="Self.Cat_Categorie" Multiplicity="0..1" />
+    <End Role="Cat_Produit" Type="Self.Cat_Produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Categorie">
+        <PropertyRef Name="Code_Categorie" />
+      </Principal>
+      <Dependent Role="Cat_Produit">
+        <PropertyRef Name="Code_Categorie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cat_Produit_Cat_Produit1">
+    <End Role="Cat_Produit" Type="Self.Cat_Produit" Multiplicity="1" />
+    <End Role="Cat_Produit1" Type="Self.Cat_Produit" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Produit">
+        <PropertyRef Name="Code_Produit" />
+      </Principal>
+      <Dependent Role="Cat_Produit1">
+        <PropertyRef Name="Code_Produit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Catalogue_Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cat_Categorie" EntityType="Self.Cat_Categorie" />
+    <EntitySet Name="Cat_Produit" EntityType="Self.Cat_Produit" />
+    <AssociationSet Name="FK_Cat_Produit_Cat_Produit" Association="Self.FK_Cat_Produit_Cat_Produit">
+      <End Role="Cat_Categorie" EntitySet="Cat_Categorie" />
+      <End Role="Cat_Produit" EntitySet="Cat_Produit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cat_Produit_Cat_Produit1" Association="Self.FK_Cat_Produit_Cat_Produit1">
+      <End Role="Cat_Produit" EntitySet="Cat_Produit" />
+      <End Role="Cat_Produit1" EntitySet="Cat_Produit" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
